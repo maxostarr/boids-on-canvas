@@ -71,7 +71,10 @@ const followClusterBehavior = (
 
     on.angle += (smallestAngleMouse / on.distanceToPoint(mouseX, mouseY)) * 20;
   }
-  on.extras.speed = Math.abs((Math.random() - 0.5) / 50 + on.extras.speed);
+  on.extras.speed = Math.max(
+    1,
+    Math.abs((Math.random() - 0.5) / 50 + on.extras.speed),
+  );
   on.forward(on.extras.speed);
 };
 
