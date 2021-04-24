@@ -6,7 +6,7 @@ const ctx = canvas.getContext("2d");
 Boid.screenSize = [canvas.width, canvas.height];
 ctx.fillStyle = `rgba(0,0,200, 0.5)`;
 
-const flock = new FollowCluster(ctx, 300);
+const flock = FollowCluster(ctx);
 // const boid1 = new Boid(ctx, 200, 200);
 // const boid2 = new Boid(ctx, 200, 240);
 

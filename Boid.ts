@@ -26,13 +26,9 @@ const drawFromCoords = (
   y: number,
 ): void => {
   ctx.beginPath();
-  const screenX =
-    ((x % Boid.screenSize[0]) + Boid.screenSize[0]) % Boid.screenSize[0];
-  const screenY =
-    ((y % Boid.screenSize[1]) + Boid.screenSize[1]) % Boid.screenSize[1];
-  ctx.moveTo(screenX, screenY);
+  ctx.moveTo(x, y);
   for (const [dx, dy] of coords) {
-    ctx.lineTo(screenX + dx, screenY + dy);
+    ctx.lineTo(x + dx, y + dy);
   }
   ctx.fill();
 };
