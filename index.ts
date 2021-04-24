@@ -6,12 +6,19 @@ const ctx = canvas.getContext("2d");
 Boid.screenSize = [canvas.width, canvas.height];
 ctx.fillStyle = `rgba(0,0,200, 0.5)`;
 
-const flock = new FollowCluster(ctx, 400);
+const flock = new FollowCluster(ctx, 300);
+// const boid1 = new Boid(ctx, 200, 200);
+// const boid2 = new Boid(ctx, 200, 240);
+
+// boid1.angle = boid1.angleTo(boid2);
+// boid2.angle = boid2.angleTo(boid1);
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   flock.update();
   flock.draw();
+  // boid1.draw();
+  // boid2.draw();
   window.requestAnimationFrame(draw);
 };
 

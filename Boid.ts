@@ -125,6 +125,6 @@ export class Boid implements CanvasObject {
   }
 
   angleTo(other: Boid) {
-    return Math.atan2(other._y, other._x);
+    return Math.atan((other._y - this._y) / (other._x - this._x));
   }
 }

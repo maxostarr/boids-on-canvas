@@ -62,16 +62,18 @@ export class FollowCluster implements Flock {
   boids = [] as Array<Boid>;
 
   behavior(on: Boid) {
-    let avgAngle = 0;
-    let avgDist = 0;
+    let closest;
+    let closestDistance = Infinity;
     for (const boid of this.boids) {
       if (boid === on) continue;
-      avgAngle += on.angleTo(boid);
-      avgDist += on.distanceTo(boid);
+      const distance = on.distanceTo(boid);
+      if (distance < closestDistance) {
+        closest = boid;
+        closestDistance = distance;
+      }
     }
-    on.angle =
-      avgAngle / this.boids.length -
-      avgDist / this.boids.length / on.extras.affinity;
+    on.extras.targetAngle = on.angleTo(closest) * 1;
+    on.rotate(on.extras.targetAngle / 10);
   }
 
   update() {
@@ -98,6 +100,7 @@ export class FollowCluster implements Flock {
         {
           speed: Math.floor(Math.random() * 5 + 1),
           affinity: Math.floor(Math.random() * 10 - 20),
+          targetAngle: 0,
         },
       );
       this.boids.push(boid);
