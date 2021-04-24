@@ -56,25 +56,22 @@ const followClusterBehavior = (
     }
   }
 
-  const targetAngleCloses =
-    // -on.angleToPoint(mouseX, mouseY)
-    +on.angleTo(closest);
+  const targetAngleCloses = +on.angleTo(closest);
 
   const smallestAngleClosest =
     ((targetAngleCloses - on.angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
 
   on.angle += smallestAngleClosest / 10;
 
-  const targetAngleMouse = -on.angleToPoint(mouseX, mouseY);
-  // +on.angleTo(closest);
+  if (on.distanceToPoint(mouseX, mouseY) < 100) {
+    const targetAngleMouse = Math.PI + on.angleToPoint(mouseX, mouseY);
 
-  const smallestAngleMouse =
-    ((targetAngleMouse - on.angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+    const smallestAngleMouse =
+      ((targetAngleMouse - on.angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
 
-  on.angle += (smallestAngleMouse / on.distanceToPoint(mouseX, mouseY)) * 2;
-  // Math.min(targetAngle - on.angle, targetAngle - on.angle + Math.PI) / 10;
-  // (on.angleTo(closest) - on.angle) / 10 -
-  // on.rotate(-on.angleToPoint(runtimeInputs.mouseX, runtimeInputs.mouseY) / 5);
+    on.angle += (smallestAngleMouse / on.distanceToPoint(mouseX, mouseY)) * 20;
+  }
+  on.extras.speed = Math.abs((Math.random() - 0.5) / 50 + on.extras.speed);
   on.forward(on.extras.speed);
 };
 
