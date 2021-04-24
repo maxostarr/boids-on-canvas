@@ -1,26 +1,17 @@
 import { Boid } from "./Boid";
+import { Follow, FollowCluster } from "./Flock";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d");
-// ctx.fillRect(10, 10, 50, 50);
-
+Boid.screenSize = [canvas.width, canvas.height];
 ctx.fillStyle = `rgba(0,0,200, 0.5)`;
-// ctx.fillRect(30, 30, 50, 50);
-let x = 250;
-let y = 250;
-let scale = 5;
-let t = 0;
 
-const boid = new Boid(ctx);
-boid.x = x;
-boid.y = y;
-boid.scale = 4;
+const flock = new FollowCluster(ctx, 400);
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  boid.draw();
-  boid.forward(1);
-  boid.rotate(0.5 - Math.random());
+  flock.update();
+  flock.draw();
   window.requestAnimationFrame(draw);
 };
 
