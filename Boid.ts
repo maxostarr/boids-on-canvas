@@ -65,7 +65,7 @@ export class Boid<T> implements CanvasObject {
   }
   public set angle(value) {
     const dTheta = value - this._angle;
-    this._angle = value;
+    this._angle = value % (Math.PI * 2);
     this._coords = rotateCoords(this._coords, dTheta);
   }
 
@@ -108,7 +108,7 @@ export class Boid<T> implements CanvasObject {
   }
 
   rotate(dTheta: number) {
-    this.angle += dTheta;
+    this.angle = dTheta;
   }
 
   draw() {
@@ -116,11 +116,18 @@ export class Boid<T> implements CanvasObject {
     drawFromCoords(this._coords, this.ctx, this._x, this._y);
   }
 
+  distanceToPoint(x: number, y: number) {
+    return Math.sqrt((this._x - x) ** 2 + (this._y - y) ** 2);
+  }
   distanceTo(other: Boid<any>) {
     return Math.sqrt((this._x - other._x) ** 2 + (this._y - other._y) ** 2);
   }
 
+  angleToPoint(x: number, y: number) {
+    return Math.atan2(y - this._y, x - this._x);
+  }
+
   angleTo(other: Boid<any>) {
-    return Math.atan((other._y - this._y) / (other._x - this._x));
+    return Math.atan2(other._y - this._y, other._x - this._x);
   }
 }
