@@ -67,7 +67,7 @@ const followBehavior = (
   }
   on.angle =
     avgAngle / boids.length - avgDist / boids.length / on.extras.affinity;
-  on.forward(1);
+  on.forward(on.extras.speed);
 };
 
 export const Follow = (ctx: CanvasRenderingContext2D) =>
@@ -88,7 +88,7 @@ const followClusterBehavior = (
     }
   }
   on.rotate(on.angleTo(closest) / 20);
-  on.forward(1);
+  on.forward(on.extras.speed);
 };
 
 export const FollowCluster = (ctx: CanvasRenderingContext2D) =>
