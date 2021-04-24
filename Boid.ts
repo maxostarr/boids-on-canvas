@@ -33,7 +33,7 @@ const drawFromCoords = (
   ctx.fill();
 };
 
-export class Boid implements CanvasObject {
+export class Boid<T> implements CanvasObject {
   private _coords: Cords = [
     [0, 0],
     [2, -2],
@@ -50,7 +50,7 @@ export class Boid implements CanvasObject {
   private ctx: CanvasRenderingContext2D;
   private _scale = 0;
   public color = "rgb(0,0,0)";
-  public extras = {} as any;
+  public extras = {} as T;
 
   public get scale() {
     return this._scale;
@@ -89,7 +89,7 @@ export class Boid implements CanvasObject {
     ctx: CanvasRenderingContext2D,
     x?: number,
     y?: number,
-    extras?: object,
+    extras?: T,
     color?: string,
   ) {
     this.ctx = ctx;
@@ -116,11 +116,11 @@ export class Boid implements CanvasObject {
     drawFromCoords(this._coords, this.ctx, this._x, this._y);
   }
 
-  distanceTo(other: Boid) {
+  distanceTo(other: Boid<any>) {
     return Math.sqrt((this._x - other._x) ** 2 + (this._y - other._y) ** 2);
   }
 
-  angleTo(other: Boid) {
+  angleTo(other: Boid<any>) {
     return Math.atan((other._y - this._y) / (other._x - this._x));
   }
 }
