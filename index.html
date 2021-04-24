@@ -9,6 +9,15 @@
   </head>
   <body>
     <canvas id="canvas" width="800" height="800"></canvas>
+    <p>
+      This is just an experiment with the HTML canvas and emergent behavior with
+      interacting actors. It doesn't implement the standard boid rules (yet).
+    </p>
+    <p>These are the rules it does implement</p>
+    <ol>
+      <li>Move toward the closest other boid.</li>
+      <li>If the boid is within 100 units of the mouse, turn away from it.</li>
+    </ol>
     <style>
       canvas {
         border: 1px solid black;
